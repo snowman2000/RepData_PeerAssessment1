@@ -12,7 +12,7 @@ data<-read.table(unz("./activity.zip","activity.csv"), header= TRUE, sep =",",co
 
 ## What is mean total number of steps taken per day?
 1. Make a histogram of the total number of steps taken each day
-```{r echo=TRUE}
+```{r Total_Steps_Per_day, echo=TRUE}
 steps_per_day<- aggregate(steps ~ date, data, sum)
 hist(steps_per_day$steps,main="Total Steps Per Day",xlab="steps")
 ```
@@ -28,7 +28,7 @@ Total mean and median of number of steps taken per day is `r total_mean` and `r 
 ## What is the average daily activity pattern?
 1. Make a time series plot (i.e. type = "l") of the 5-minute interval (x-axis)
 and the average number of steps taken, averaged across all days (y-axis)
-```{r echo=TRUE}
+```{r Average_Steps_Per_Interval,echo=TRUE}
 avg_steps_per_interval<- aggregate(steps ~ interval, data, mean)
 plot(as.numeric(avg_steps_per_interval$interval),avg_steps_per_interval$steps,main="Average Steps Per Interval",xlab="Interval", ylab="Steps",type ="l")
 ```
@@ -66,7 +66,7 @@ these values differ from the estimates from the first part of the assignment?
 What is the impact of imputing missing data on the estimates of the total
 daily number of steps?
 
-```{r echo =TRUE}
+```{r Total_Steps_Comparison,echo =TRUE}
 
 steps_per_day1<- aggregate(steps ~ date, newdata, sum)
 hist(steps_per_day1$steps,main="Total Steps Per Day Comparison",xlab="steps")
@@ -94,7 +94,7 @@ day.
 5-minute interval (x-axis) and the average number of steps taken, averaged
 across all weekday days or weekend days (y-axis). The plot should look
 something like the following, which was creating using simulated data:
-```{r echo=TRUE}
+```{r Average_Steps_Per_Day_By_Intervals,echo=TRUE}
 weekends <- c("Sunday","Saturday")
 newdata[,4]<-"Weekdays"
 newdata[weekdays(newdata$date) %in% weekends,4]<-"Weekends"
